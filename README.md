@@ -2,7 +2,7 @@
 
 ## Overview
 
-Thank you for visiting the pyVanCrime app project repository. This repository hosts the dashboard for the Vancouver (Canada) crime data released by the Vancouver Police Department ([VPD](https://vpd.ca/)). This information, which spans 2003 through 2022, is public domain and is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
+Thank you for visiting the `pyVanCrime` app project repository. This repository hosts the dashboard for the Vancouver (Canada) crime data released by the Vancouver Police Department ([VPD](https://vpd.ca/)). This information, which spans 2003 through 2022, is public domain and is licensed under [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
 This README file serves as a central location for the project's documentation. You may either go directly to a subsection of interest or continue reading to learn more.
 
@@ -51,7 +51,7 @@ The next section will help you get started with that and guide you through the s
 
 Interested in contributing? Check out the [contributing guidelines](CONTRIBUTING.md). Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
 
-To setup your development environment to contribute to VanCrime please follow these instructions below:
+To setup your development environment to contribute to `pyVanCrime` please follow these instructions below:
 
 1.  Clone this [repository](https://github.com/markusnam/pyVanCrime) and create a development branch
 
@@ -75,7 +75,7 @@ To setup your development environment to contribute to VanCrime please follow th
 
 5. Paste the link to a browser. This will launch `pyVanCrime` app
 
-6.  Congratulations, you are now able to develop and contribute to the pyVanCrime dashboard application.
+6.  Congratulations, you are now able to develop and contribute to the `pyVanCrime` dashboard application.
 
 ## License
 
