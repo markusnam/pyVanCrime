@@ -61,9 +61,21 @@ To setup your development environment to contribute to VanCrime please follow th
 
 2.  Open `app.py` under the `src` folder with an IDE such as Jupyter Lab or Visual Studio Code.
 
-3.  You're almost there. After editing `app.py`, type `python app.py` in a command prompt. This will launch `pyVanCrime` app
+3.  You're almost there. After editing `app.py`, type `python app.py` in a command prompt.
 
-4.  Congratulations, you are now able to develop and contribute to the pyVanCrime dashboard application.
+4.  Copy the link shown on the command prompt. (in this example, it is `http://127.0.0.1:8050/`)
+
+    ``` console
+    Dash is running on http://127.0.0.1:8050/
+
+    * Serving Flask app 'app' (lazy loading)
+    * Environment: production
+    ...
+    ```
+
+5. Paste the link to a browser. This will launch `pyVanCrime` app
+
+6.  Congratulations, you are now able to develop and contribute to the pyVanCrime dashboard application.
 
 ## License
 
