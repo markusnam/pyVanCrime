@@ -26,10 +26,11 @@ The program follows a conventional dashboard layout in which the user can select
 
 Here's a link to the live [application]() (TBC) if you like to check it out.
 
-There are three visulization components in total: <br>
+There are four visulization components in total: <br>
 1. Average number of crimes by month - Bar plot
 2. Average number of crimes by weekday - Area plot
 3. Breakdown by crime type - Table
+4. Breakdown by neighbourhood - Table
 
 <img src='img/pyVanCrime.gif'>
 
