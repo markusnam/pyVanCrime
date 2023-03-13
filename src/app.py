@@ -23,7 +23,10 @@ app = dash.Dash(external_stylesheets=[dbc.themes.SOLAR])
 app.layout = dbc.Container(
     [
         dbc.Row(
-            html.H1(html.Mark('pyVanCrime - Vancouver Crime Data'))
+            [
+                html.H1(html.Mark('pyVanCrime - Vancouver Crime Data')),
+                html.H1(id = 'year-range')
+            ]
         ),
         dbc.Row(
             html.Hr()
@@ -100,28 +103,52 @@ app.layout = dbc.Container(
                             ]
                         ),
                         dbc.Row(
-                            dbc.Col(
-                                [
-                                    html.H5('Count by Crime Type',
-                                            style={'text-align': 'center'}),
-                                    dash_table.DataTable(
-                                        id='crime-table',
-                                        columns=[
-                                            {'name': 'TYPE', 'id': 'TYPE'},
-                                            {'name': 'COUNT', 'id': 'COUNT'}
-                                        ],
-                                        style_table={
-                                            'width': '60%',
-                                            'margin-left': 'auto',
-                                            'margin-right': 'auto'
-                                        },
-                                        style_header={
-                                            'backgroundColor': 'lightgrey',
-                                            'fontWeight': 'bold'
-                                        }
-                                    )
-                                ]
-                            )
+                            [
+                                dbc.Col(
+                                    [
+                                        html.H5('Total Count by Crime Type',
+                                                style={'text-align': 'center'}),
+                                        dash_table.DataTable(
+                                            id='type-table',
+                                            columns=[
+                                                {'name': 'TYPE', 'id': 'TYPE'},
+                                                {'name': 'COUNT', 'id': 'COUNT'}
+                                            ],
+                                            style_table={
+                                                'width': '50%',
+                                                'margin-left': 'auto',
+                                                'margin-right': 'auto'
+                                            },
+                                            style_header={
+                                                'backgroundColor': 'lightgrey',
+                                                'fontWeight': 'bold'
+                                            }
+                                        )
+                                    ]
+                                ),
+                                dbc.Col(
+                                    [
+                                        html.H5('Total Count by Neighbourhood',
+                                                style={'text-align': 'center'}),
+                                        dash_table.DataTable(
+                                            id='nhood-table',
+                                            columns=[
+                                                {'name': 'NEIGHBOURHOOD', 'id': 'NEIGHBOURHOOD'},
+                                                {'name': 'COUNT', 'id': 'COUNT'}
+                                            ],
+                                            style_table={
+                                                'width': '50%',
+                                                'margin-left': 'auto',
+                                                'margin-right': 'auto'
+                                            },
+                                            style_header={
+                                                'backgroundColor': 'lightgrey',
+                                                'fontWeight': 'bold'
+                                            }
+                                        )
+                                    ]
+                                )
+                            ]
                         )
                     ]
                 )
@@ -251,19 +278,40 @@ def update_weekday_plot(data):
 
     return chart.to_html()
 
-@app.callback(Output('crime-table', 'data'),
+@app.callback(Output('type-table', 'data'),
               Input('memory-output', 'data'))
-def on_data_set_table(data):
+def on_data_set_type_table(data):
     df_selected = pd.read_json(data)
     
     if len(df_selected) == 0:
-        crime_df = pd.DataFrame(columns=['TYPE', 'COUNT'])
+        type_df = pd.DataFrame(columns=['TYPE', 'COUNT'])
     else:
-        crime_df = pd.DataFrame(df_selected.groupby('TYPE').size(),
+        type_df = pd.DataFrame(df_selected.groupby('TYPE').size(),
                      columns=['COUNT']).sort_values(['COUNT', 'TYPE'], ascending=False).reset_index()
-        crime_df['COUNT'] = crime_df['COUNT'].apply(lambda x: '{:,.0f}'.format(x))
+        type_df['COUNT'] = type_df['COUNT'].apply(lambda x: '{:,.0f}'.format(x))
 
-    return crime_df.to_dict('records')
+    return type_df.to_dict('records')
+
+@app.callback(Output('nhood-table', 'data'),
+              Input('memory-output', 'data'))
+def on_data_set_nhood_table(data):
+    df_selected = pd.read_json(data)
+    
+    if len(df_selected) == 0:
+        nhood_df = pd.DataFrame(columns=['NEIGHBOURHOOD', 'COUNT'])
+    else:
+        nhood_df = pd.DataFrame(df_selected.groupby('NEIGHBOURHOOD').size(),
+                     columns=['COUNT']).sort_values(['COUNT', 'NEIGHBOURHOOD'], ascending=False).reset_index()
+        nhood_df['COUNT'] = nhood_df['COUNT'].apply(lambda x: '{:,.0f}'.format(x))
+
+    return nhood_df.to_dict('records')
+
+@app.callback(
+    Output('year-range', 'children'),
+    Input('year-slider', 'value')
+)
+def update_year_range(year):    
+    return '(from ' + str(year[0]) + ' to ' + str(year[1]) + ')'
 
 @app.callback(
     Output('nhood-dropdown', 'value'),
