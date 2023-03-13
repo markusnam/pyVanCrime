@@ -26,15 +26,24 @@ The program follows a conventional dashboard layout in which the user can select
 
 Here's a link to the live [application]() (TBC) if you like to check it out.
 
-<!-- ![](img/vancrime.gif) --> (IMAGE TO BE ADDED)
+There are three visulization components in total: <br>
+1. Average number of crimes by month - Bar plot
+2. Average number of crimes by weekday - Area plot
+3. Breakdown by crime type - Table
 
-This dashboard application includes:
+![](img/pyVancrime.gif)
 
--   Filter the crime statistics by beginning and ending years to display it (in the convenient form of a slider)
+User can make use of the widgets on the left to narrow down the scope of search:
 
--   Focus on a certain Vancouver neighbourhood by applying a filter (in the form of a multi-selection widget)
+-   Filter the crime statistics by beginning and ending years to display it (in the convenient form of a slider).
 
-<!-- ![](img/paste-0939ED93.png){width="279"} --> (IMAGE TO BE ADDED)
+<img src='img/range-slider.jpg' width='250'>
+
+-   Focus on a certain Vancouver neighbourhood by applying a filter (in the form of a multi-selection dropdown).
+-   The dropdown supports typing for convenient search.
+-   The handy `Select All` button allows user to select all Neighbourhood in one go.
+
+<img src='img/dropdown.gif' height='300'>
 
 ## How to get involved and contribute ?
 
