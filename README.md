@@ -31,7 +31,7 @@ There are three visulization components in total: <br>
 2. Average number of crimes by weekday - Area plot
 3. Breakdown by crime type - Table
 
-![](img/pyVancrime.gif)
+<img src='img/pyVanCrime.gif'>
 
 User can make use of the widgets on the left to narrow down the scope of search:
 
