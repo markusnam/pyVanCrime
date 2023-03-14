@@ -19,6 +19,7 @@ max_year = df['YEAR'].max()
 # setup dashboard layout
 # app = dash.Dash(__name__, external_stylesheets=['https://codepen.io/chriddyp/pen/bWLwgP.css'])
 app = dash.Dash(external_stylesheets=[dbc.themes.SOLAR])
+server = app.server
 
 app.layout = dbc.Container(
     [
