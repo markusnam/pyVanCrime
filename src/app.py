@@ -5,7 +5,7 @@ import numpy as np
 import altair as alt
 
 # read data
-df = pd.read_csv("../data/raw/crimedata_csv_AllNeighbourhoods_AllYears.csv")
+df = pd.read_csv("https://raw.githubusercontent.com/markusnam/pyVanCrime/main/data/raw/crimedata_csv_AllNeighbourhoods_AllYears.csv")
 
 # data wrangling - drop na, remove the latest year (not full year in general), remove x=0 and y=0
 max_year = df['YEAR'].max()
