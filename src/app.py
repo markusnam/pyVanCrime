@@ -1,11 +1,12 @@
-from dash import dash, html, dcc, dash_table, Input, Output, dash_table, State
+from dash import dash, html, dcc, dash_table, Input, Output, dash_table
 import dash_bootstrap_components as dbc
 import pandas as pd
 import numpy as np
 import altair as alt
 
+
 # read data
-df = pd.read_csv("../data/raw/crimedata_csv_AllNeighbourhoods_AllYears.csv")
+df = pd.read_csv("../data/processed/crimedata_csv_AllNeighbourhoods_from2015.csv")
 
 # data wrangling - drop na, remove the latest year (not full year in general), remove x=0 and y=0
 max_year = df['YEAR'].max()
@@ -21,8 +22,10 @@ max_year = df['YEAR'].max()
 app = dash.Dash(external_stylesheets=[dbc.themes.SOLAR])
 server = app.server
 
+# main layout
 app.layout = dbc.Container(
     [
+        # title row
         dbc.Row(
             [
                 html.H1(html.Mark('pyVanCrime - Vancouver Crime Data')),
@@ -34,6 +37,7 @@ app.layout = dbc.Container(
         ),
         dbc.Row(
             [
+                # widgets area
                 dbc.Col(
                     [
                         html.H5(html.U('Select Year Range:')),
@@ -71,6 +75,7 @@ app.layout = dbc.Container(
                     ],
                     width = 2
                 ),
+                # content area
                 dbc.Col(
                     [
                         dbc.Row(
@@ -160,6 +165,7 @@ app.layout = dbc.Container(
 )
 
 
+# filter data
 @app.callback(
     Output('memory-output', 'data'),
     Input('year-slider', 'value'),
@@ -175,6 +181,8 @@ def update_data(year, nhood):
     
     return df_selected.to_json()
 
+
+# plot by month
 @app.callback(
     Output('month-plot', 'srcDoc'),
     Input('memory-output', 'data')
@@ -217,6 +225,8 @@ def update_month_plot(data):
         )
     return chart.to_html()
 
+
+# plot by weekday
 @app.callback(
     Output('weekday-plot', 'srcDoc'),
     Input('memory-output', 'data')
@@ -279,6 +289,8 @@ def update_weekday_plot(data):
 
     return chart.to_html()
 
+
+# crime type table
 @app.callback(Output('type-table', 'data'),
               Input('memory-output', 'data'))
 def on_data_set_type_table(data):
@@ -293,6 +305,8 @@ def on_data_set_type_table(data):
 
     return type_df.to_dict('records')
 
+
+# neighbourhood table
 @app.callback(Output('nhood-table', 'data'),
               Input('memory-output', 'data'))
 def on_data_set_nhood_table(data):
@@ -307,6 +321,8 @@ def on_data_set_nhood_table(data):
 
     return nhood_df.to_dict('records')
 
+
+# year range next to title
 @app.callback(
     Output('year-range', 'children'),
     Input('year-slider', 'value')
@@ -314,6 +330,7 @@ def on_data_set_nhood_table(data):
 def update_year_range(year):    
     return '(from ' + str(year[0]) + ' to ' + str(year[1]) + ')'
 
+# select all button
 @app.callback(
     Output('nhood-dropdown', 'value'),
     Input('select-all', 'n_clicks')
@@ -324,6 +341,7 @@ def update_dropdown_value(select_clicks):
     else:
         return dash.no_update
     return 
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
