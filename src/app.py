@@ -77,92 +77,108 @@ app.layout = dbc.Container(
                 ),
                 # content area
                 dbc.Col(
-                    [
-                        dbc.Row(
-                            [
-                                dbc.Col(
-                                    [
-                                        html.H5('Average Month Count'),
-                                        html.Iframe(
-                                            id='month-plot',
-                                            style={
-                                                "border-width": "0",
-                                                "width": "140%",
-                                                "height": "360px"
-                                            }
-                                        )
-                                    ]
-                                ),
-                                dbc.Col(
-                                    [
-                                        html.H5('Average Weekday Count'),
-                                        html.Iframe(
-                                            id='weekday-plot',
-                                            style={
-                                                "border-width": "0",
-                                                "width": "140%",
-                                                "height": "360px"
-                                            }
-                                        )
-                                    ]
-                                )
-                            ]
-                        ),
-                        dbc.Row(
-                            [
-                                dbc.Col(
-                                    [
-                                        html.H5('Total Count by Crime Type',
-                                                style={'text-align': 'center'}),
-                                        dash_table.DataTable(
-                                            id='type-table',
-                                            columns=[
-                                                {'name': 'TYPE', 'id': 'TYPE'},
-                                                {'name': 'COUNT', 'id': 'COUNT'}
-                                            ],
-                                            style_table={
-                                                'width': '50%',
-                                                'margin-left': 'auto',
-                                                'margin-right': 'auto'
-                                            },
-                                            style_header={
-                                                'backgroundColor': 'lightgrey',
-                                                'fontWeight': 'bold'
-                                            }
-                                        )
-                                    ]
-                                ),
-                                dbc.Col(
-                                    [
-                                        html.H5('Total Count by Neighbourhood',
-                                                style={'text-align': 'center'}),
-                                        dash_table.DataTable(
-                                            id='nhood-table',
-                                            columns=[
-                                                {'name': 'NEIGHBOURHOOD', 'id': 'NEIGHBOURHOOD'},
-                                                {'name': 'COUNT', 'id': 'COUNT'}
-                                            ],
-                                            style_table={
-                                                'width': '50%',
-                                                'margin-left': 'auto',
-                                                'margin-right': 'auto'
-                                            },
-                                            style_header={
-                                                'backgroundColor': 'lightgrey',
-                                                'fontWeight': 'bold'
-                                            }
-                                        )
-                                    ]
-                                )
-                            ]
-                        )
-                    ]
+                    dcc.Loading(
+                        id = 'loading',
+                        children = [
+                            html.Div(id='loading-output'),
+                            dbc.Row(
+                                [
+                                    dbc.Col(
+                                        [
+                                            html.H5('Average Month Count'),
+                                            html.Iframe(
+                                                id='month-plot',
+                                                style={
+                                                    "border-width": "0",
+                                                    "width": "140%",
+                                                    "height": "360px"
+                                                }
+                                            )
+                                        ]
+                                    ),
+                                    dbc.Col(
+                                        [
+                                            html.H5('Average Weekday Count'),
+                                            html.Iframe(
+                                                id='weekday-plot',
+                                                style={
+                                                    "border-width": "0",
+                                                    "width": "140%",
+                                                    "height": "360px"
+                                                }
+                                            )
+                                        ]
+                                    )
+                                ]
+                            ),
+                            dbc.Row(
+                                [
+                                    dbc.Col(
+                                        [
+                                            html.H5('Total Count by Crime Type',
+                                                    style={'text-align': 'center'}),
+                                            dash_table.DataTable(
+                                                id='type-table',
+                                                columns=[
+                                                    {'name': 'TYPE', 'id': 'TYPE'},
+                                                    {'name': 'COUNT', 'id': 'COUNT'}
+                                                ],
+                                                style_table={
+                                                    'width': '50%',
+                                                    'margin-left': 'auto',
+                                                    'margin-right': 'auto'
+                                                },
+                                                style_header={
+                                                    'backgroundColor': 'lightgrey',
+                                                    'fontWeight': 'bold'
+                                                }
+                                            )
+                                        ]
+                                    ),
+                                    dbc.Col(
+                                        [
+                                            html.H5('Total Count by Neighbourhood',
+                                                    style={'text-align': 'center'}),
+                                            dash_table.DataTable(
+                                                id='nhood-table',
+                                                columns=[
+                                                    {'name': 'NEIGHBOURHOOD', 'id': 'NEIGHBOURHOOD'},
+                                                    {'name': 'COUNT', 'id': 'COUNT'}
+                                                ],
+                                                style_table={
+                                                    'width': '50%',
+                                                    'margin-left': 'auto',
+                                                    'margin-right': 'auto'
+                                                },
+                                                style_header={
+                                                    'backgroundColor': 'lightgrey',
+                                                    'fontWeight': 'bold'
+                                                }
+                                            )
+                                        ]
+                                    )
+                                ]
+                            )
+                        ],
+                        type = 'circle'
+                    )
                 )
             ]
         )
     ],
     fluid=True
 )
+
+
+# spinner
+@app.callback(
+    Output('loading', 'fullscreen'),
+    Output('loading-output', 'children'),
+    Input('year-slider', 'value'),
+    Input('nhood-dropdown', 'value')
+)
+def update_output(year, nhood):
+    return False, ''
 
 
 # filter data
