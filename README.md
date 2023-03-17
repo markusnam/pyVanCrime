@@ -24,7 +24,7 @@ In a nutshell, this is a dashboard application that helps users and interested p
 
 The program follows a conventional dashboard layout in which the user can select or specify the scope of what they need to visualize on the left side, and a set of relevant visualization components that update in response to the user's selection criteria on the right.
 
-Here's a link to the live [application]() (TBC) if you like to check it out.
+Here's a link to the live [application](https://dash-app-pyvancrime.onrender.com/) if you like to check it out.
 
 There are four visulization components in total: <br>
 1. Average number of crimes by month - Bar plot
@@ -94,7 +94,7 @@ To setup your development environment to contribute to `pyVanCrime` please follo
 
 ## Quick Links
 
--   [pyVanCrime Live Application]() (TBC)
+-   [pyVanCrime Live Application](https://dash-app-pyvancrime.onrender.com/)
 -   [Issues](https://github.com/markusnam/pyVanCrime/issues)
 -   [Proposal](reports/proposal.md)
 -   [Contributing Guidelines](CONTRIBUTING.md)
