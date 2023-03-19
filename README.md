@@ -92,8 +92,8 @@ To setup your development environment to contribute to `pyVanCrime` please follo
 `pyVanCrime` was created by Markus Nam. It is licensed under the terms of the [MIT license](LICENSE).
 
 
-## Quick Links
-
+## Quick Links and References
+-   [Vancouver (Canada) crime data released by the Vancouver Police Department](https://vpd.ca/)
 -   [pyVanCrime Live Application](https://dash-app-pyvancrime.onrender.com/)
 -   [Issues](https://github.com/markusnam/pyVanCrime/issues)
 -   [Proposal](reports/proposal.md)
