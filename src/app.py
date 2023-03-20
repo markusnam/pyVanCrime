@@ -40,7 +40,7 @@ app.layout = dbc.Container(
                 # widgets area
                 dbc.Col(
                     [
-                        html.H5(html.U('Select Year Range:')),
+                        html.H5('Select Year Range:'),
                         dcc.RangeSlider(
                             id='year-slider',
                             min=min_year,
@@ -59,11 +59,11 @@ app.layout = dbc.Container(
                         ),
                         html.Br(),
                         html.Br(),
-                        html.H5(html.U('Select Neighbourhood')),
+                        html.H5('Select Neighbourhood'),
                         dcc.Dropdown(
                             id = 'nhood-dropdown',
                             options = [{'label': n, 'value': n} for n in np.sort(df['NEIGHBOURHOOD'].unique())],
-                            value = [],
+                            value = ['Oakridge'],
                             multi = True,
                             searchable = True,
                             placeholder = 'Select Neighbourhood(s)',
@@ -71,6 +71,7 @@ app.layout = dbc.Container(
                         ),
                         html.Button('Select All', id='select-all'),
                         html.Hr(),
+                        html.P("The crime statistics that have been made public by the Vancouver Police Department are the basis for this dashboard. Please choose the year range and neighbourhood(s) of interest in order to visualize the crime data."),
                         dcc.Store(id='memory-output')
                     ],
                     width = 2
@@ -116,16 +117,16 @@ app.layout = dbc.Container(
                                     dbc.Col(
                                         [
                                             html.H5('Total Count by Crime Type',
-                                                    style={'text-align': 'center'}),
+                                                    style={'text-align': 'left'}),
                                             dash_table.DataTable(
                                                 id='type-table',
                                                 columns=[
-                                                    {'name': 'TYPE', 'id': 'TYPE'},
+                                                    {'name': 'CRIME TYPE', 'id': 'TYPE'},
                                                     {'name': 'COUNT', 'id': 'COUNT'}
                                                 ],
                                                 style_table={
                                                     'width': '50%',
-                                                    'margin-left': 'auto',
+                                                    'margin-left': '1px',
                                                     'margin-right': 'auto'
                                                 },
                                                 style_header={
@@ -138,7 +139,7 @@ app.layout = dbc.Container(
                                     dbc.Col(
                                         [
                                             html.H5('Total Count by Neighbourhood',
-                                                    style={'text-align': 'center'}),
+                                                    style={'text-align': 'left'}),
                                             dash_table.DataTable(
                                                 id='nhood-table',
                                                 columns=[
@@ -147,7 +148,7 @@ app.layout = dbc.Container(
                                                 ],
                                                 style_table={
                                                     'width': '50%',
-                                                    'margin-left': 'auto',
+                                                    'margin-left': '1px',
                                                     'margin-right': 'auto'
                                                 },
                                                 style_header={
